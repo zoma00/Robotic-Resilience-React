@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#0b1220"/>
+  <!-- shield shape -->
+  <path d="M50 8 L74 22 V46 C74 65 61 79 50 86 C39 79 26 65 26 46 V22 Z" fill="#9ae6b4"/>
+  <!-- medical cross (subtle) -->
+  <rect x="44" y="34" width="12" height="26" fill="#0b1220" rx="2"/>
+  <rect x="36" y="44" width="28" height="12" fill="#0b1220" rx="2"/>
+</svg>

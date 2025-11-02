@@ -1,0 +1,175 @@
+/* Mobile-Specific CSS for Background Images */
+/* This file handles mobile-responsive backgrounds with device-specific optimizations */
+
+/* Mobile Background Container */
+@media screen and (max-width: 768px) {
+  .bg-slideshow {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    z-index: -1 !important;
+    background-color: #0a0e17 !important;
+  }
+  
+  .bg-slideshow img {
+    position: absolute !important;
+    /* Position in top-right corner for mobile */
+    top: 20px !important;
+    right: 20px !important;
+    /* Much smaller dimensions for mobile */
+    width: 25vw !important;
+    height: 25vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+    transition: opacity 1s ease-in-out !important;
+    opacity: 0;
+    border-radius: 12px !important;
+    /* Add subtle shadow for depth */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  .bg-slideshow img.active {
+    opacity: 0.3 !important; /* Light opacity for mobile readability */
+  }
+  
+  /* Page-specific mobile adjustments */
+  
+  /* Index page - lighter backgrounds for better text readability */
+  body:has(.home-page) .bg-slideshow img.active,
+  body[data-page="index"] .bg-slideshow img.active {
+    opacity: 0.15 !important;
+    width: 22vw !important;
+    height: 22vh !important;
+  }
+  
+  /* Survival kit page - slightly more visible backgrounds */
+  body:has(.survival-kit-page) .bg-slideshow img.active,
+  body[data-page="survival-kit"] .bg-slideshow img.active {
+    opacity: 0.2 !important;
+    width: 25vw !important;
+    height: 25vh !important;
+  }
+  
+  /* Navigation page keeps default 0.4 opacity */
+  
+  /* Portrait orientation specific fixes */
+  @media (orientation: portrait) {
+    .bg-slideshow img {
+      width: 20vw !important;
+      height: 20vh !important;
+      top: 15px !important;
+      right: 15px !important;
+    }
+    
+    body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+    }
+    
+    /* Index page portrait - smaller for better text readability */
+    body:has(.home-page) .bg-slideshow img,
+    body[data-page="index"] .bg-slideshow img {
+      width: 18vw !important;
+      height: 18vh !important;
+    }
+    
+    /* Survival kit portrait - slightly larger for visual impact */
+    body:has(.survival-kit-page) .bg-slideshow img,
+    body[data-page="survival-kit"] .bg-slideshow img {
+      width: 20vw !important;
+      height: 20vh !important;
+    }
+  }
+  
+  /* Landscape orientation specific fixes */
+  @media (orientation: landscape) {
+    .bg-slideshow img {
+      width: 25vw !important;
+      height: 25vh !important;
+      top: 15px !important;
+      right: 15px !important;
+    }
+  }
+  
+  /* Content adjustments for mobile */
+  main {
+    background: rgba(11, 18, 32, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    margin: 10px !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+  }
+  
+  .site-header {
+    background: rgba(8, 18, 33, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+  
+  /* Enhanced text readability on mobile */
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    color: #fff !important;
+  }
+  
+  p, li {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+  }
+  
+  /* Kit sections mobile adjustments */
+  .kit-section {
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin: 15px 0 !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media screen and (max-width: 480px) {
+  .bg-slideshow img.active {
+    opacity: 0.12 !important; /* Very light for small screens */
+  }
+  
+  .bg-slideshow img {
+    width: 15vw !important;
+    height: 15vh !important;
+    top: 10px !important;
+    right: 10px !important;
+    border-radius: 8px !important;
+  }
+  
+  main {
+    margin: 5px !important;
+    padding: 12px !important;
+  }
+  
+  .kit-section {
+    margin: 10px 0 !important;
+    padding: 12px !important;
+  }
+}
+
+/* High DPI mobile displays */
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  .bg-slideshow img {
+    image-rendering: -webkit-optimize-contrast !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bg-slideshow img {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+  
+  .bg-slideshow img.active {
+    opacity: 0.5 !important;
+  }
+}
