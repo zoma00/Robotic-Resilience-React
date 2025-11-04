@@ -1,0 +1,76 @@
+I see the issue! You have `gh-pages` branches on both remotes, and Git doesn't know which one you want to checkout. Let's check the remote branches to understand the deployment setup. 
+
+Ran terminal command: git branch -r
+
+Now let's check your current deployment configuration in package.json to see which repository it's deploying to: 
+
+Read [](file:///home/hazem-elbatawy/Downloads/Robotic_Apocalypse/package.json#1-1), lines 1 to 20
+
+Perfect! Now I can see the deployment setup clearly:
+
+## **🎯 Deployment Repository Analysis:**
+
+### **Current Configuration:**
+- **Homepage:** `https://zoma00.github.io/Robotic-Resilience-React`
+- **Deploy target:** `https://github.com/zoma00/Robotic-Resilience-React.git`
+- **Deploy command:** `gh-pages -d dist -r https://github.com/zoma00/Robotic-Resilience-React.git`
+
+### **Remote Branches:**
+| Repository | gh-pages | Purpose |
+|------------|----------|---------|
+| **react-repo** | ✅ | **Active deployment** (Robotic-Resilience-React) |
+| **origin** | ✅ | Backup/archive (Robotic-Resilience) |
+
+## **✅ Deployment Repository:**
+
+**Your app deploys to:** `react-repo/gh-pages` (Robotic-Resilience-React repository)
+
+To check the deployment branch specifically: 
+
+Ran terminal command: git checkout --track react-repo/gh-pages
+
+Ran terminal command: ls -la
+
+Ran terminal command: git checkout restructured-project
+
+Perfect! Now I understand your deployment setup:
+
+## **📋 Deployment Repository Confirmed:**
+
+✅ **Active deployment:** `react-repo/gh-pages` → `https://zoma00.github.io/Robotic-Resilience-React`  
+✅ **Deploy command:** `npm run deploy` → pushes to `react-repo/gh-pages`  
+✅ **Homepage URL:** `https://zoma00.github.io/Robotic-Resilience-React`  
+
+## **🎯 For Google Analytics Setup:**
+
+Since your site deploys to `https://zoma00.github.io/Robotic-Resilience-React`, you'll need:
+
+1. **Google Analytics property URL:** `https://zoma00.github.io/Robotic-Resilience-React/`
+2. **Tracking ID** from your Google Analytics dashboard
+
+**Ready to add Google Analytics! Please provide your tracking ID (G-XXXXXXXXXX) and I'll add it to your React project immediately!** 🚀 
+
+Updated todo list
+
+
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse$ git checkout --track react-repo/gh-pages
+branch 'gh-pages' set up to track 'react-repo/gh-pages'.
+Switched to a new branch 'gh-pages'
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse$ ls -la
+total 72
+drwxrwxr-x   7 hazem-elbatawy hazem-elbatawy  4096 Nov  4 17:45 .
+drwxr-xr-x  25 hazem-elbatawy hazem-elbatawy  4096 Nov  4 13:07 ..
+drwxrwxr-x   7 hazem-elbatawy hazem-elbatawy  4096 Nov  4 17:45 assets
+drwxrwxr-x   3 hazem-elbatawy hazem-elbatawy  4096 Nov  3 12:00 dist
+drwxrwxr-x   8 hazem-elbatawy hazem-elbatawy  4096 Nov  4 17:45 .git
+-rw-rw-r--   1 hazem-elbatawy hazem-elbatawy   310 Nov  4 17:45 .gitignore
+-rw-rw-r--   1 hazem-elbatawy hazem-elbatawy   791 Nov  4 17:45 index.html
+drwxrwxr-x 278 hazem-elbatawy hazem-elbatawy 12288 Nov  3 00:30 node_modules
+drwxrwxr-x   3 hazem-elbatawy hazem-elbatawy  4096 Nov  4 13:22 robotic-resilience-react
+-rw-rw-r--   1 hazem-elbatawy hazem-elbatawy 21594 Nov  4 17:45 test-image.jpg
+-rw-rw-r--   1 hazem-elbatawy hazem-elbatawy  1497 Nov  4 17:45 vite.svg
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse$ git checkout restructured-project
+Switched to branch 'restructured-project'
+
+
+

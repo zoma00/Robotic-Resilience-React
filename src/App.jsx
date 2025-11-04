@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
+
+// Google Analytics page tracking
+const usePageTracking = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (typeof gtag !== 'undefined') {
+      gtag('config', 'G-91S8R10CS0', {
+        page_path: location.pathname + location.search
+      });
+    }
+  }, [location]);
+};
 
 // Helper function to get asset URLs with correct base path
 const getAssetUrl = (path) => {
@@ -506,20 +519,29 @@ const EgyptPage = () => {
   );
 };
 
+// Component wrapper to track page views
+const AppContent = () => {
+  usePageTracking();
+  
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/survival-kit" element={<SurvivalKitPage />} />
+        <Route path="/navigation" element={<NavigationPage />} />
+        <Route path="/egypt" element={<EgyptPage />} />
+      </Routes>
+    </div>
+  );
+};
+
 function App() {
   // Always reflect Vite's configured base ("/" in dev, "/Robotic-Resilience/" in prod)
   const basename = import.meta.env.BASE_URL;
   
   return (
     <Router basename={basename}>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/survival-kit" element={<SurvivalKitPage />} />
-          <Route path="/navigation" element={<NavigationPage />} />
-          <Route path="/egypt" element={<EgyptPage />} />
-        </Routes>
-      </div>
+      <AppContent />
     </Router>
   );
 }
