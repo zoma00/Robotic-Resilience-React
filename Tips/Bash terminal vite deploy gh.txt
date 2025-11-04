@@ -1,0 +1,72 @@
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse/robotic-resilience-react$ npm run build
+
+> robotic-resilience-vite@0.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+✓ 35 modules transformed.
+dist/index.html                   0.79 kB │ gzip:  0.39 kB
+dist/assets/index-7ad25a49.css    4.83 kB │ gzip:  1.58 kB
+dist/assets/router-6a86cf9b.js   20.64 kB │ gzip:  7.66 kB
+dist/assets/index-093dda0c.js    20.93 kB │ gzip:  6.99 kB
+dist/assets/vendor-b69f2a9f.js  141.28 kB │ gzip: 45.40 kB
+✓ built in 3.39s
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse/robotic-resilience-react$ npm run deploy
+
+> robotic-resilience-vite@0.0.0 predeploy
+> npm run build
+
+
+> robotic-resilience-vite@0.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+✓ 35 modules transformed.
+dist/index.html                   0.79 kB │ gzip:  0.39 kB
+dist/assets/index-7ad25a49.css    4.83 kB │ gzip:  1.58 kB
+dist/assets/router-6a86cf9b.js   20.64 kB │ gzip:  7.66 kB
+dist/assets/index-093dda0c.js    20.93 kB │ gzip:  6.99 kB
+dist/assets/vendor-b69f2a9f.js  141.28 kB │ gzip: 45.40 kB
+✓ built in 3.12s
+
+> robotic-resilience-vite@0.0.0 deploy
+> gh-pages -d dist -r https://github.com/zoma00/Robotic-Resilience-React.git
+
+Published
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse/robotic-resilience-react$ npm run build
+
+> robotic-resilience-vite@0.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+✓ 35 modules transformed.
+dist/index.html                   0.79 kB │ gzip:  0.39 kB
+dist/assets/index-8d5d0aad.css    4.83 kB │ gzip:  1.58 kB
+dist/assets/router-6a86cf9b.js   20.64 kB │ gzip:  7.66 kB
+dist/assets/index-a2f670a6.js    20.93 kB │ gzip:  6.99 kB
+dist/assets/vendor-b69f2a9f.js  141.28 kB │ gzip: 45.40 kB
+✓ built in 3.31s
+
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse/robotic-resilience-react$ npm run deploy
+
+> robotic-resilience-vite@0.0.0 predeploy
+> npm run build
+
+
+> robotic-resilience-vite@0.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+✓ 35 modules transformed.
+dist/index.html                   0.79 kB │ gzip:  0.39 kB
+dist/assets/index-8d5d0aad.css    4.83 kB │ gzip:  1.58 kB
+dist/assets/router-6a86cf9b.js   20.64 kB │ gzip:  7.66 kB
+dist/assets/index-a2f670a6.js    20.93 kB │ gzip:  6.99 kB
+dist/assets/vendor-b69f2a9f.js  141.28 kB │ gzip: 45.40 kB
+✓ built in 3.51s
+
+> robotic-resilience-vite@0.0.0 deploy
+> gh-pages -d dist -r https://github.com/zoma00/Robotic-Resilience-React.git
+
+Published
+hazem-elbatawy@hazem-elbatawy-Vostro-15-3510:~/Downloads/Robotic_Apocalypse/robotic-resilience-react$ 

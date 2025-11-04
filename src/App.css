@@ -34,7 +34,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0; /* Behind content but above body background */
   overflow: hidden;
   background-color: #0a0e17;
 }
@@ -52,93 +52,96 @@ html {
 }
 
 .bg-slideshow img.active {
-  opacity: 0.6;
+  opacity: 0.7 !important; /* Increase visibility */
+  /* Slightly shrink background on desktop */
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
-/* Mobile Background Slideshow - PERFECT SIZING */
+/* Mobile Background Slideshow - Responsive for all orientations */
 @media screen and (max-width: 768px) {
+  /* Remove body background on mobile so slideshow is visible */
+  body {
+    background-color: transparent !important;
+  }
+  
   .bg-slideshow {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: 0; /* Same as desktop - behind content but visible */
     overflow: hidden;
-    background-color: #0a0e17;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #0a0e17; /* Normal background */
   }
   
   .bg-slideshow img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* FIXED PIXEL SIZES - NO MORE VIEWPORT ISSUES! */
-    width: 180px;
-    height: 180px;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    /* Force hardware acceleration for mobile */
-    will-change: opacity;
-    backface-visibility: hidden;
-    /* Ensure images are loaded */
-    min-width: 180px;
-    min-height: 180px;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    object-fit: cover !important;
+    opacity: 0 !important;
+    transition: opacity 1.5s ease-in-out !important;
+    display: block !important;
+    z-index: 1 !important;
   }
   
   .bg-slideshow img.active {
-    opacity: 0.3 !important; /* Increased opacity for better visibility */
+    opacity: 0.6 !important;
+    display: block !important;
+    visibility: visible !important;
   }
 }
 
-/* Portrait orientation - even smaller */
+/* Mobile Portrait - Smaller images for better readability */
 @media screen and (max-width: 768px) and (orientation: portrait) {
   .bg-slideshow img {
-    width: 140px;
-    height: 140px;
-    border-radius: 15px;
+    /* Much smaller images for portrait mode */
+    max-width: 60vw !important;
+    max-height: 40vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important; /* Changed from cover to contain */
+    object-position: center !important;
+    transform: translate(-50%, -50%) !important; /* Center without scaling */
+  }
+  
+  .bg-slideshow img.active {
+    opacity: 0.3 !important; /* Even lower opacity for better text readability */
+  }
+  
+  /* Force transparent backgrounds for all content in portrait mode */
+  main {
+    background: rgba(11, 18, 32, 0.05) !important;
+  }
+  
+  section {
+    background: rgba(255, 255, 255, 0.03) !important;
+  }
+  
+  .lede {
+    background: rgba(11, 18, 32, 0.08) !important;
+  }
+  
+  .site-header {
+    background: rgba(8, 18, 33, 0.1) !important;
   }
 }
 
-/* Landscape orientation */
+/* Mobile Landscape - Full coverage for horizontal screens */
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .bg-slideshow img {
-    width: 160px;
-    height: 160px;
-  }
-}
-
-/* Extra small devices */
-@media screen and (max-width: 480px) {
-  .bg-slideshow img {
-    width: 120px !important;
-    height: 120px !important;
-    border-radius: 15px;
-    min-width: 120px !important;
-    min-height: 120px !important;
+    /* Full coverage for landscape */
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    transform: translate(-50%, -50%) scale(0.9) !important; /* Slightly smaller for landscape */
   }
   
   .bg-slideshow img.active {
-    opacity: 0.25 !important; /* Slightly visible for tiny screens */
-  }
-}
-
-/* Very small devices */
-@media screen and (max-width: 360px) {
-  .bg-slideshow img {
-    width: 80px !important;
-    height: 80px !important;
-    border-radius: 10px;
-  }
-  
-  .bg-slideshow img.active {
-    opacity: 0.1;
+    opacity: 0.6 !important; /* Good visibility for landscape */
   }
 }
 
@@ -156,8 +159,9 @@ html {
 
 /* Header */
 .site-header {
-  background: linear-gradient(90deg, #081221, #0b1726);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  /* Glass-like transparent header */
+  background: linear-gradient(90deg, rgba(8, 18, 33, 0.25), rgba(11, 23, 38, 0.25));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 1;
 }
@@ -196,22 +200,27 @@ html {
 main {
   position: relative;
   z-index: 1;
-  background: rgba(11, 18, 32, 0.85);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
+  /* Glass-like ultra transparent content overlay */
+  background: rgba(11, 18, 32, 0.2);
+  border-radius: 16px;
   margin: 20px auto;
   padding: 30px;
-  border: 1px solid rgba(154, 230, 180, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  /* Enhanced text contrast for glass effect */
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 /* Section Styling */
 section {
   margin-top: 40px;
   padding: 25px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   border-left: 4px solid var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
@@ -227,13 +236,15 @@ section h3 {
   font-size: 1.3rem;
 }
 
-/* Lede Section */
+/* Lede Section - Glassmorphism */
 .lede {
-  background: linear-gradient(90deg, rgba(154, 230, 180, 0.08), transparent);
-  padding: 20px;
-  border-left: 4px solid var(--accent);
-  border-radius: 8px;
+  background: rgba(11, 18, 32, 0.2);
+  border: 1px solid rgba(154, 230, 180, 0.2);
+  padding: 25px;
+  border-radius: 12px;
   margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* Lists */
@@ -283,7 +294,7 @@ a:hover {
   main {
     margin: 10px;
     padding: 20px;
-    background: rgba(11, 18, 32, 0.9);
+    background: rgba(11, 18, 32, 0.15);
   }
   
   section {

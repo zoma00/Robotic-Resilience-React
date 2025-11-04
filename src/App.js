@@ -2,20 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
-// Helper function to get asset URLs with correct base path
-const getAssetUrl = (path) => {
-  const base = import.meta.env.BASE_URL;
-  return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
-};
-
-// Image data for slideshow - Using helper function for correct paths
+// Image data for slideshow
 const indexImages = [
-  getAssetUrl('assets/kit-photos/map/world-map-dotted.jpg'),
-  getAssetUrl('assets/kit-photos/Robo/post-apocalyptic-scene-with-two-robot_917213-239945.jpg'),
-  getAssetUrl('assets/kit-photos/compass/compass survival navigation.jpg'),
-  getAssetUrl('assets/kit-photos/Robo/Robo one.jpg'),
-  getAssetUrl('assets/kit-photos/Life_straws.jpg'),
-  getAssetUrl('assets/kit-photos/Robo/E0-Robot-Apocalypse.jpg')
+  'assets/kit-photos/map/world-map-dotted.jpg',
+  'assets/kit-photos/Robo/post-apocalyptic-scene-with-two-robot_917213-239945.jpg',
+  'assets/kit-photos/compass/compass survival navigation.jpg',
+  'assets/kit-photos/Robo/Robo one.jpg',
+  'assets/kit-photos/Life_straws.jpg',
+  'assets/kit-photos/Robo/E0-Robot-Apocalypse.jpg'
 ];
 
 // Navigation Component
@@ -32,38 +26,24 @@ const Navigation = () => (
 const BackgroundSlideshow = ({ images = indexImages }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [loadingErrors, setLoadingErrors] = useState([]);
 
   useEffect(() => {
-    console.log('BackgroundSlideshow: Starting image preload...', images);
-    
     // Preload images for better mobile performance
     const preloadImages = async () => {
-      const errors = [];
-      const imagePromises = images.map((src, index) => {
+      const imagePromises = images.map((src) => {
         return new Promise((resolve, reject) => {
           const img = new Image();
-          img.onload = () => {
-            console.log(`Image ${index} loaded successfully:`, src);
-            resolve(src);
-          };
-          img.onerror = (error) => {
-            console.error(`Image ${index} failed to load:`, src, error);
-            errors.push({ index, src, error });
-            reject(error);
-          };
+          img.onload = resolve;
+          img.onerror = reject;
           img.src = src;
         });
       });
       
       try {
-        await Promise.allSettled(imagePromises);
-        console.log('All images processed. Errors:', errors);
-        setLoadingErrors(errors);
+        await Promise.all(imagePromises);
         setImagesLoaded(true);
       } catch (error) {
-        console.log('Image loading completed with errors:', error);
-        setLoadingErrors(errors);
+        console.log('Some images failed to load:', error);
         setImagesLoaded(true); // Continue anyway
       }
     };
@@ -92,10 +72,9 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
           alt={`Background ${index + 1}`}
           className={index === currentImageIndex ? 'active' : ''}
           loading={index === 0 ? 'eager' : 'lazy'}
-          onLoad={() => console.log(`✅ Background image loaded: ${imageSrc}`)}
-          onError={(e) => console.error(`❌ Background image failed: ${imageSrc}`, e)}
           style={{
-            display: 'block' // Force display
+            // Force display for mobile debugging
+            display: imagesLoaded ? 'block' : 'none'
           }}
         />
       ))}
@@ -108,28 +87,10 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
           color: 'white',
           fontSize: '12px',
           zIndex: 1000,
-          background: 'rgba(0,0,0,0.8)',
-          padding: '8px',
-          borderRadius: '4px'
+          background: 'rgba(0,0,0,0.5)',
+          padding: '5px'
         }}>
-          Loading images... ({images.length} total)
-        </div>
-      )}
-      {/* Error indicator */}
-      {imagesLoaded && loadingErrors.length > 0 && (
-        <div style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          color: 'red',
-          fontSize: '10px',
-          zIndex: 1000,
-          background: 'rgba(0,0,0,0.8)',
-          padding: '5px',
-          borderRadius: '4px',
-          maxWidth: '200px'
-        }}>
-          {loadingErrors.length} images failed to load
+          Loading images...
         </div>
       )}
     </div>
@@ -306,12 +267,12 @@ const HomePage = () => (
 // Survival Kit Page Component
 const SurvivalKitPage = () => {
   const kitImages = [
-    getAssetUrl('assets/kit-photos/survival/survival three.jpg'),
-    getAssetUrl('assets/kit-photos/survival/survival two.jpg'),
-    getAssetUrl('assets/kit-photos/Robo/Robo seven.jpg'),
-    getAssetUrl('assets/kit-photos/Robo/Robo three.jpg'),
-    getAssetUrl('assets/kit-photos/Robo/Robo four.jpg'),
-    getAssetUrl('assets/kit-photos/Robo/Robo five.jpg')
+    'assets/kit-photos/survival/survival three.jpg',
+    'assets/kit-photos/survival/survival two.jpg',
+    'assets/kit-photos/Robo/Robo seven.jpg',
+    'assets/kit-photos/Robo/Robo three.jpg',
+    'assets/kit-photos/Robo/Robo four.jpg',
+    'assets/kit-photos/Robo/Robo five.jpg'
   ];
 
   return (
@@ -375,9 +336,9 @@ const SurvivalKitPage = () => {
 // Navigation Tutorial Page Component
 const NavigationPage = () => {
   const navImages = [
-    getAssetUrl('assets/kit-photos/compass/compass survival navigation.jpg'),
-    getAssetUrl('assets/kit-photos/map/world-map-dotted.jpg'),
-    getAssetUrl('assets/kit-photos/map/survival map.jpg')
+    'assets/kit-photos/compass/compass survival navigation.jpg',
+    'assets/kit-photos/map/world-map-dotted.jpg',
+    'assets/kit-photos/map/survival map.jpg'
   ];
 
   return (
@@ -445,8 +406,8 @@ const NavigationPage = () => {
 // Egypt Map Page Component
 const EgyptPage = () => {
   const egyptImages = [
-    getAssetUrl('assets/kit-photos/map/world-map-dotted.jpg'),
-    getAssetUrl('assets/kit-photos/map/survival map.jpg')
+    'assets/kit-photos/map/world-map-dotted.jpg',
+    'assets/kit-photos/map/survival map.jpg'
   ];
 
   return (
@@ -507,11 +468,8 @@ const EgyptPage = () => {
 };
 
 function App() {
-  // Always reflect Vite's configured base ("/" in dev, "/Robotic-Resilience/" in prod)
-  const basename = import.meta.env.BASE_URL;
-  
   return (
-    <Router basename={basename}>
+    <Router basename="/Robotic-Resilience-React">
       <div className="App">
         <Routes>
           <Route path="/" element={<HomePage />} />

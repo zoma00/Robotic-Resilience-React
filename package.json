@@ -2,15 +2,15 @@
   "name": "robotic-resilience-vite",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://zoma00.github.io/Robotic-Resilience-React",
   "type": "module",
-  "homepage": "https://zoma00.github.io/Robotic-Resilience-Vite/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/zoma00/Robotic-Resilience-React.git"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -18,14 +18,14 @@
     "react-router-dom": "^6.30.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react": "^7.32.2",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "gh-pages": "^6.3.0",
-    "vite": "^4.4.5"
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "gh-pages": "^6.1.1",
+    "vite": "^4.5.14"
   }
 }

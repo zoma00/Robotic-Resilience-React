@@ -1,0 +1,4 @@
+i found the photos already here:
+robotic-resilience-react/public/assets/kit-photos
+robotic-resilience-react/public/assets/kit-photos/compass
+robotic-resilience-react/public/assets/kit-photos/Robo
