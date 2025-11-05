@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Cache busting utility - static version, only change when deploying new content
-const CONTENT_VERSION = '1.1.5'; // Updated with MutationObserver error protection
+const CONTENT_VERSION = '1.1.8'; // Force cache refresh to show current content
 
 // Force cache refresh function (less aggressive)
 const refreshCache = () => {
@@ -152,7 +152,10 @@ const HomePage = () => (
 
     <main className="wrap">
       <article>
-        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small communities navigating an automated world. From immediate crisis response to long-term resilience building, discover the essential knowledge that could mean the difference between chaos and continuity</p>
+        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. 
+          This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small 
+          communities navigating an automated world. From immediate crisis response to long-term resilience building, 
+          discover the essential knowledge that could mean the difference between chaos and continuity</p>
 
         <nav className="toc">
           <strong>Contents</strong>
