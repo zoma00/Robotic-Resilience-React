@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Cache busting utility - static version, only change when deploying new content
-const CONTENT_VERSION = '1.1.0'; // Change this only when you deploy new content
+const CONTENT_VERSION = '1.1.1'; // Updated for banner text changes
 
 // Force cache refresh function (less aggressive)
 const refreshCache = () => {
@@ -129,7 +129,8 @@ const HomePage = () => (
         borderBottom: '1px solid rgba(255,255,255,0.2)'
       }}>
         <p style={{margin: 0, color: 'white', fontSize: '0.9rem'}}>
-          🌐 <strong>Full Experience:</strong> Visit the <a href="https://zoma00.github.io/Robotic-Resilience/" style={{color: '#bfdbfe', textDecoration: 'underline'}}>original site</a> for PDF downloads & multilingual support!
+          🌐 <strong>Full Experience:</strong> Visit the <a href="https://zoma00.github.io/Robotic-Resilience/" style={{color: '#bfdbfe', textDecoration: 'underline'}}>original site</a> for PDF downloads & multilingual support & Discussions forums!
+          
         </p>
       </div>
       
