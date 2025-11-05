@@ -90,6 +90,35 @@
           return false;
         }
       });
+      
+      // Handle MutationObserver errors from extensions
+      window.addEventListener('error', function(event) {
+        if (event.error && event.error.message && 
+            (event.error.message.includes('MutationObserver') || 
+             event.error.message.includes('parameter 1 is not of type \'Node\'') ||
+             event.error.message.includes('observe'))) {
+          // Suppress MutationObserver errors from extensions
+          console.log('Suppressed MutationObserver error from extension');
+          event.preventDefault();
+          return false;
+        }
+      });
+      
+      // Protect global MutationObserver from invalid usage
+      if (window.MutationObserver) {
+        const originalObserve = MutationObserver.prototype.observe;
+        MutationObserver.prototype.observe = function(target, options) {
+          try {
+            if (!target || typeof target.nodeType === 'undefined') {
+              console.warn('Invalid target for MutationObserver, skipping');
+              return;
+            }
+            return originalObserve.call(this, target, options);
+          } catch (error) {
+            console.warn('MutationObserver error caught and suppressed:', error);
+          }
+        };
+      }
     </script>
     <script type="module" crossorigin src="/Robotic-Resilience-React/assets/index-5ae552d7.js"></script>
     <link rel="modulepreload" crossorigin href="/Robotic-Resilience-React/assets/vendor-b69f2a9f.js">
