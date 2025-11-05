@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Cache - Robotic Resilience</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Cache Clear Tool</h1>
+        <p>If you're not seeing the latest updates on the website, use this tool to force clear all cached data.</p>
+        
+        <button class="btn" onclick="clearAllCaches()">🔄 Clear All Caches</button>
+        <button class="btn" onclick="window.open('/', '_blank')">🌐 Open Main Site</button>
+        
+        <div id="status" class="status">
+            <p id="statusText"></p>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 14px; color: #666;">
+            <h3>Manual Instructions:</h3>
+            <p><strong>Chrome/Edge:</strong> Ctrl+Shift+R (hard refresh)</p>
+            <p><strong>Firefox:</strong> Ctrl+F5 or Ctrl+Shift+R</p>
+            <p><strong>Safari:</strong> Cmd+Shift+R</p>
+            <p><strong>Mobile:</strong> Clear browser cache in settings</p>
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            const statusText = document.getElementById('statusText');
+            statusText.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+        }
+
+        async function clearAllCaches() {
+            showStatus('Starting cache clearing process...', 'warning');
+            
+            try {
+                let clearedItems = [];
+                
+                // Clear Service Worker caches
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    if (cacheNames.length > 0) {
+                        await Promise.all(cacheNames.map(name => caches.delete(name)));
+                        clearedItems.push(`${cacheNames.length} service worker caches`);
+                    }
+                }
+                
+                // Unregister service workers
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    if (registrations.length > 0) {
+                        registrations.forEach(registration => registration.unregister());
+                        clearedItems.push(`${registrations.length} service workers`);
+                    }
+                }
+                
+                // Clear storage
+                localStorage.clear();
+                sessionStorage.clear();
+                clearedItems.push('local storage', 'session storage');
+                
+                // Clear IndexedDB
+                if ('indexedDB' in window && indexedDB.databases) {
+                    const databases = await indexedDB.databases();
+                    if (databases.length > 0) {
+                        databases.forEach(db => indexedDB.deleteDatabase(db.name));
+                        clearedItems.push(`${databases.length} IndexedDB databases`);
+                    }
+                }
+                
+                showStatus(`✅ Successfully cleared: ${clearedItems.join(', ')}. Reloading in 3 seconds...`, 'success');
+                
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
+                
+            } catch (error) {
+                showStatus(`❌ Error clearing caches: ${error.message}`, 'warning');
+                console.error('Cache clearing error:', error);
+            }
+        }
+        
+        // Auto-clear on page load if requested
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('auto') === 'true') {
+            setTimeout(clearAllCaches, 1000);
+        }
+    </script>
+</body>
+</html>
