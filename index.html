@@ -22,29 +22,36 @@
     
     <!-- Cache Busting Script -->
     <script>
-      // Add version parameter to force cache refresh
-      const APP_VERSION = '1.1.' + Date.now();
+      // Static version - only change when you actually deploy new content
+      const APP_VERSION = '1.1.0';
       
-      // Function to force reload if needed
+      // Function to check for updates (much less aggressive)
       function checkForUpdates() {
         const lastVersion = localStorage.getItem('app_version');
-        if (lastVersion && lastVersion !== APP_VERSION) {
-          console.log('New version detected, clearing cache...');
-          // Clear various caches
-          if ('caches' in window) {
-            caches.keys().then(function(names) {
-              names.forEach(function(name) {
-                caches.delete(name);
-              });
-            });
-          }
-          // Clear local storage except for version
-          const version = localStorage.getItem('app_version');
-          localStorage.clear();
+        const lastCheckTime = localStorage.getItem('last_check_time');
+        const now = Date.now();
+        
+        // Only check for updates every 5 minutes and only if version changed
+        if (lastVersion !== APP_VERSION && (!lastCheckTime || (now - lastCheckTime) > 300000)) {
+          console.log('Version changed from', lastVersion, 'to', APP_VERSION);
           localStorage.setItem('app_version', APP_VERSION);
-          // Force hard reload
-          window.location.reload(true);
+          localStorage.setItem('last_check_time', now.toString());
+          
+          // Only clear cache if this is a genuine version change (not first visit)
+          if (lastVersion && lastVersion !== 'null') {
+            console.log('Clearing cache due to version update...');
+            if ('caches' in window) {
+              caches.keys().then(function(names) {
+                names.forEach(function(name) {
+                  caches.delete(name);
+                });
+              });
+            }
+            // Force reload only once per version change
+            window.location.reload(true);
+          }
         } else {
+          // Just update the version without reloading
           localStorage.setItem('app_version', APP_VERSION);
         }
       }
@@ -52,20 +59,7 @@
       // Run on page load
       window.addEventListener('load', checkForUpdates);
       
-      // Add cache-busting to all fetch requests
-      if ('fetch' in window) {
-        const originalFetch = window.fetch;
-        window.fetch = function(...args) {
-          if (args[0] && typeof args[0] === 'string') {
-            const url = new URL(args[0], window.location.origin);
-            url.searchParams.set('v', APP_VERSION);
-            args[0] = url.toString();
-          }
-          return originalFetch.apply(this, args);
-        };
-      }
-      
-      // Register Service Worker
+      // Register Service Worker (simplified)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker.register('/sw.js')
