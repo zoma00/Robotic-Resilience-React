@@ -23,7 +23,7 @@
     <!-- Cache Busting Script -->
     <script>
       // Static version - only change when you actually deploy new content
-      const APP_VERSION = '1.1.1';
+      const APP_VERSION = '1.1.2';
       
       // Function to check for updates (much less aggressive)
       function checkForUpdates() {
@@ -59,29 +59,25 @@
       // Run on page load
       window.addEventListener('load', checkForUpdates);
       
-      // Register Service Worker (simplified)
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
-              console.log('ServiceWorker registration successful');
-              
-              // Listen for updates
-              registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    console.log('New content available, will refresh on next visit');
-                    // Optionally show a notification to user
-                  }
-                });
-              });
-            })
-            .catch(function(err) {
-              console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-      }
+      // Handle extension-related errors gracefully
+      window.addEventListener('error', function(event) {
+        if (event.error && event.error.message && 
+            event.error.message.includes('message channel closed')) {
+          // Suppress Chrome extension errors that don't affect our app
+          event.preventDefault();
+          return false;
+        }
+      });
+      
+      // Handle unhandled promise rejections from extensions
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && event.reason.message && 
+            event.reason.message.includes('message channel closed')) {
+          // Suppress Chrome extension promise rejections
+          event.preventDefault();
+          return false;
+        }
+      });
     </script>
     <script type="module" crossorigin src="/Robotic-Resilience-React/assets/index-79301731.js"></script>
     <link rel="modulepreload" crossorigin href="/Robotic-Resilience-React/assets/vendor-b69f2a9f.js">
