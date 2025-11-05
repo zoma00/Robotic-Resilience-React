@@ -31,15 +31,17 @@ const indexImages = [
   getAssetUrl('assets/kit-photos/Robo/E0-Robot-Apocalypse.jpg')
 ];
 
-// Navigation Component
-const Navigation = () => (
-  <nav className="header-nav-links" style={{display:'block', textAlign:'center', marginBottom:'12px'}}>
-    <Link to="/">Home</Link> |{' '}
-    <Link to="/survival-kit">War Survival Kit</Link> |{' '}
-    <Link to="/navigation">Navigation Tutorial</Link> |{' '}
-    <Link to="/egypt">Egypt Map</Link>
-  </nav>
-);
+// Simple Navigation Component
+const Navigation = () => {
+  return (
+    <nav className="header-nav-links" style={{display:'block', textAlign:'center', marginBottom:'12px'}}>
+      <Link to="/">Home</Link> |{' '}
+      <Link to="/survival-kit">War Survival Kit</Link> |{' '}
+      <Link to="/navigation">Navigation Tutorial</Link> |{' '}
+      <Link to="/egypt">Egypt Map</Link>
+    </nav>
+  );
+};
 
 // Background Slideshow Component (with configurable images)
 const BackgroundSlideshow = ({ images = indexImages }) => {
@@ -161,7 +163,7 @@ const HomePage = () => (
         borderBottom: '1px solid rgba(255,255,255,0.2)'
       }}>
         <p style={{margin: 0, color: 'white', fontSize: '0.9rem'}}>
-          🌐 <strong>Full Experience:</strong> Visit the <a href="https://zoma00.github.io/Robotic-Resilience/" style={{color: '#bfdbfe', textDecoration: 'underline'}}>original site</a> for PDF downloads & multilingual support!
+          🌐 <strong>Full Experience:</strong> Visit the <a href="https://zoma00.github.io/Robotic-Resilience/" style={{color: '#bfdbfe', textDecoration: 'underline'}}>original site</a> for PDF downloads & multilingual support & Discussions forums!
         </p>
       </div>
       
@@ -175,7 +177,10 @@ const HomePage = () => (
 
     <main className="wrap">
       <article>
-        <p className="lede">That's a deep and fascinating Scenario. We live in a world — especially as AI and robotics become more advanced. Below is a compact, realistic survival & rebuild plan for a small group (~10–20 people). Think of it as a practical Human Continuity Blueprint.</p>
+        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. 
+          This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small 
+          communities navigating an automated world. From immediate crisis response to long-term resilience building, 
+          discover the essential knowledge that could mean the difference between chaos and continuity</p>
 
         <nav className="toc">
           <strong>Contents</strong>
