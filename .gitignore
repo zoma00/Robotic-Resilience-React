@@ -22,3 +22,38 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tips and sensitive development files
+Tips/
+tips/
+notes/
+Notes/
+*.notes
+*.personal
+*.private
+
+# Environment and configuration files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API keys and secrets
+*.key
+*.pem
+*.p12
+secrets.json
+config.local.json
+
+# Development and debugging files
+debug/
+Debug/
+*.debug
+*.temp
+*.tmp
+
+# Chat logs and development discussions
+**/all chating.txt
+**/chat*.txt
+**/conversation*.txt
