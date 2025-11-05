@@ -123,7 +123,7 @@ const HomePage = () => (
 
     <main className="wrap">
       <article>
-        <p className="lede">That's a deep and fascinating Scenario. We live in a world — especially as AI and robotics become more advanced. Below is a compact, realistic survival & rebuild plan for a small group (~10–20 people). Think of it as a practical Human Continuity Blueprint.</p>
+        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small communities navigating an automated world. From immediate crisis response to long-term resilience building, discover the essential knowledge that could mean the difference between chaos and continuity</p>
 
         <nav className="toc">
           <strong>Contents</strong>
