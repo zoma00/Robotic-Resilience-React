@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Human Continuity Blueprint - Robotic Apocalypse Survival Guide</title>
     
+    <!-- Cache Control Headers -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-91S8R10CS0"></script>
     <script>
@@ -13,6 +18,76 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-91S8R10CS0');
+    </script>
+    
+    <!-- Cache Busting Script -->
+    <script>
+      // Add version parameter to force cache refresh
+      const APP_VERSION = '1.1.' + Date.now();
+      
+      // Function to force reload if needed
+      function checkForUpdates() {
+        const lastVersion = localStorage.getItem('app_version');
+        if (lastVersion && lastVersion !== APP_VERSION) {
+          console.log('New version detected, clearing cache...');
+          // Clear various caches
+          if ('caches' in window) {
+            caches.keys().then(function(names) {
+              names.forEach(function(name) {
+                caches.delete(name);
+              });
+            });
+          }
+          // Clear local storage except for version
+          const version = localStorage.getItem('app_version');
+          localStorage.clear();
+          localStorage.setItem('app_version', APP_VERSION);
+          // Force hard reload
+          window.location.reload(true);
+        } else {
+          localStorage.setItem('app_version', APP_VERSION);
+        }
+      }
+      
+      // Run on page load
+      window.addEventListener('load', checkForUpdates);
+      
+      // Add cache-busting to all fetch requests
+      if ('fetch' in window) {
+        const originalFetch = window.fetch;
+        window.fetch = function(...args) {
+          if (args[0] && typeof args[0] === 'string') {
+            const url = new URL(args[0], window.location.origin);
+            url.searchParams.set('v', APP_VERSION);
+            args[0] = url.toString();
+          }
+          return originalFetch.apply(this, args);
+        };
+      }
+      
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('ServiceWorker registration successful');
+              
+              // Listen for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('New content available, will refresh on next visit');
+                    // Optionally show a notification to user
+                  }
+                });
+              });
+            })
+            .catch(function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
     </script>
   </head>
   <body>

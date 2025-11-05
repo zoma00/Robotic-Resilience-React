@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
+// Cache busting utility
+const CONTENT_VERSION = '1.1.0_' + new Date().toISOString().split('T')[0]; // Daily version
+
+// Force cache refresh function
+const refreshCache = () => {
+  const currentVersion = sessionStorage.getItem('content_version');
+  if (currentVersion !== CONTENT_VERSION) {
+    console.log('Content updated, refreshing cache...');
+    sessionStorage.setItem('content_version', CONTENT_VERSION);
+    // Force component re-render
+    window.location.hash = '#refresh=' + Date.now();
+  }
+};
+
 // Image data for slideshow
 const indexImages = [
   'assets/kit-photos/map/world-map-dotted.jpg',
@@ -468,9 +482,27 @@ const EgyptPage = () => {
 };
 
 function App() {
+  // Check for cache refresh on component mount
+  useEffect(() => {
+    refreshCache();
+    
+    // Add event listener for visibility change to check for updates
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        refreshCache();
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
   return (
     <Router basename="/Robotic-Resilience-React">
-      <div className="App">
+      <div className="App" key={CONTENT_VERSION}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/survival-kit" element={<SurvivalKitPage />} />
