@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Cache busting utility - static version, only change when deploying new content
-const CONTENT_VERSION = '1.1.1'; // Updated for banner text changes
+const CONTENT_VERSION = '1.1.2'; // Updated to fix console errors
 
 // Force cache refresh function (less aggressive)
 const refreshCache = () => {
