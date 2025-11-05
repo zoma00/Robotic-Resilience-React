@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Cache busting utility - static version, only change when deploying new content
-const CONTENT_VERSION = '1.1.2'; // Updated to fix console errors
+const CONTENT_VERSION = '1.1.3'; // Updated with service worker cleanup and performance fixes
 
 // Force cache refresh function (less aggressive)
 const refreshCache = () => {
@@ -48,24 +48,32 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
-    // Preload images for better mobile performance
+    // Load only the first image immediately, then preload others
     const preloadImages = async () => {
-      const imagePromises = images.map((src) => {
-        return new Promise((resolve, reject) => {
+      console.log('BackgroundSlideshow: Starting optimized image preload...', images);
+      
+      // Load first image immediately
+      const firstImage = new Image();
+      firstImage.onload = () => {
+        console.log('✅ First image loaded immediately:', images[0]);
+        setImagesLoaded(true);
+      };
+      firstImage.onerror = (err) => {
+        console.log('❌ First image failed:', images[0], err);
+        setImagesLoaded(true); // Continue anyway
+      };
+      firstImage.src = images[0];
+      
+      // Preload remaining images in background (lower priority)
+      setTimeout(() => {
+        const remainingImages = images.slice(1);
+        remainingImages.forEach((src, index) => {
           const img = new Image();
-          img.onload = resolve;
-          img.onerror = reject;
+          img.onload = () => console.log(`✅ Background image ${index + 1} loaded:`, src);
+          img.onerror = (err) => console.log(`❌ Background image ${index + 1} failed:`, src);
           img.src = src;
         });
-      });
-      
-      try {
-        await Promise.all(imagePromises);
-        setImagesLoaded(true);
-      } catch (error) {
-        console.log('Some images failed to load:', error);
-        setImagesLoaded(true); // Continue anyway
-      }
+      }, 100); // Small delay to prioritize first image
     };
 
     preloadImages();
