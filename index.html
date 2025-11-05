@@ -14,16 +14,37 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-91S8R10CS0"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-91S8R10CS0');
+      // Only initialize Google Analytics on the production domain
+      if (window.location.hostname === 'zoma00.github.io') {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Configure Google Analytics for GitHub Pages subdomain
+        gtag('config', 'G-91S8R10CS0', {
+          cookie_domain: 'zoma00.github.io',
+          cookie_flags: 'SameSite=None;Secure',
+          send_page_view: true,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+          anonymize_ip: true,
+          cookie_expires: 63072000 // 2 years in seconds
+        });
+        
+        console.log('Google Analytics initialized for', window.location.hostname);
+      } else {
+        console.log('Google Analytics disabled for development/local domain:', window.location.hostname);
+        // Stub gtag function for development
+        window.gtag = function() {
+          console.log('gtag called:', arguments);
+        };
+      }
     </script>
     
     <!-- Cache Busting Script -->
     <script>
       // Static version - only change when you actually deploy new content
-      const APP_VERSION = '1.1.5';
+      const APP_VERSION = '1.1.8';
       
       // Function to check for updates (much less aggressive)
       function checkForUpdates() {
