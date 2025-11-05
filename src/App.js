@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
-// Cache busting utility
-const CONTENT_VERSION = '1.1.0_' + new Date().toISOString().split('T')[0]; // Daily version
+// Cache busting utility - static version, only change when deploying new content
+const CONTENT_VERSION = '1.1.0'; // Change this only when you deploy new content
 
-// Force cache refresh function
+// Force cache refresh function (less aggressive)
 const refreshCache = () => {
   const currentVersion = sessionStorage.getItem('content_version');
-  if (currentVersion !== CONTENT_VERSION) {
-    console.log('Content updated, refreshing cache...');
+  const lastRefresh = sessionStorage.getItem('last_refresh');
+  const now = Date.now();
+  
+  // Only refresh if version actually changed and not within last 5 minutes
+  if (currentVersion !== CONTENT_VERSION && (!lastRefresh || (now - lastRefresh) > 300000)) {
+    console.log('Content updated, version changed from', currentVersion, 'to', CONTENT_VERSION);
     sessionStorage.setItem('content_version', CONTENT_VERSION);
-    // Force component re-render
-    window.location.hash = '#refresh=' + Date.now();
+    sessionStorage.setItem('last_refresh', now.toString());
+  } else {
+    // Just update version without action
+    sessionStorage.setItem('content_version', CONTENT_VERSION);
   }
 };
 
@@ -482,27 +488,14 @@ const EgyptPage = () => {
 };
 
 function App() {
-  // Check for cache refresh on component mount
+  // Check for cache refresh only once on component mount
   useEffect(() => {
     refreshCache();
-    
-    // Add event listener for visibility change to check for updates
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        refreshCache();
-      }
-    };
-    
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, []);
+  }, []); // Only run once when component mounts
 
   return (
     <Router basename="/Robotic-Resilience-React">
-      <div className="App" key={CONTENT_VERSION}>
+      <div className="App">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/survival-kit" element={<SurvivalKitPage />} />
