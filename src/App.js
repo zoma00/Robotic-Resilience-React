@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Cache busting utility - static version, only change when deploying new content
-const CONTENT_VERSION = '1.1.3'; // Updated with service worker cleanup and performance fixes
+const CONTENT_VERSION = '1.1.4'; // Updated with new lede content and CSS fixes
 
 // Force cache refresh function (less aggressive)
 const refreshCache = () => {
@@ -152,7 +152,7 @@ const HomePage = () => (
 
     <main className="wrap">
       <article>
-        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small communities navigating an automated world. From immediate crisis response to long-term resilience building, discover the essential knowledge that could mean the difference between chaos and continuity</p>
+        <p className="lede">That's a deep and fascinating scenario. We live in a world — especially as AI and robotics become more advanced. Below is a compact, realistic survival & rebuild plan for a small group (~10–20 people). Think of it as a practical Human Continuity Blueprint.</p>
 
         <nav className="toc">
           <strong>Contents</strong>
