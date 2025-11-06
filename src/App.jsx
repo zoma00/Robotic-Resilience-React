@@ -31,14 +31,18 @@ const indexImages = [
   getAssetUrl('assets/kit-photos/Robo/E0-Robot-Apocalypse.jpg')
 ];
 
-// Simple Navigation Component
+// Simple Navigation Component (refactored for CSS-based pipe separators)
 const Navigation = () => {
   return (
-    <nav className="header-nav-links" style={{display:'block', textAlign:'center', marginBottom:'12px'}}>
-      <Link to="/">Home</Link> |{' '}
-      <Link to="/survival-kit">War Survival Kit</Link> |{' '}
-      <Link to="/navigation">Navigation Tutorial</Link> |{' '}
-      <Link to="/egypt">Egypt Map</Link>
+    <nav style={{ display: 'block', textAlign: 'center', marginBottom: '12px' }}>
+      <div className="nav-flex">
+        <ul className="nav-menu pipe-separated" style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+          <li><Link className="nav-link glow-animated-text" to="/">Home</Link></li>
+          <li><Link className="nav-link glow-animated-text" to="/survival-kit">War Survival Kit</Link></li>
+          <li><Link className="nav-link glow-animated-text" to="/navigation">Navigation Tutorial</Link></li>
+          <li><Link className="nav-link glow-animated-text" to="/egypt">Egypt Map</Link></li>
+        </ul>
+      </div>
     </nav>
   );
 };
@@ -155,32 +159,29 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
 const HomePage = () => (
   <>
     <BackgroundSlideshow />
+    <div className="original-site-banner">
+      <a className="banner-link banner-glow-motion" href="https://zoma00.github.io/Robotic-Resilience/" target="_blank" rel="noopener noreferrer">
+        <span role="img" aria-label="Earth" style={{marginRight: '0.3em', verticalAlign: 'middle'}}>🌍</span>
+        For full experience visit the Web Version
+      </a>
+    </div>
     <header className="site-header">
-      <div className="original-site-banner" style={{
-        background: 'linear-gradient(90deg, #059669, #2563eb)', 
-        padding: '10px', 
-        textAlign: 'center', 
-        borderBottom: '1px solid rgba(255,255,255,0.2)'
-      }}>
-        <p style={{margin: 0, color: 'white', fontSize: '0.9rem'}}>
-          🌐 <strong>Full Experience:</strong> Visit the <a href="https://zoma00.github.io/Robotic-Resilience/" style={{color: '#bfdbfe', textDecoration: 'underline'}}>original site</a> for PDF downloads & multilingual support & Discussions forums!
-        </p>
-      </div>
-      
       <div className="wrap">
         <Navigation />
-        <h1>Human Continuity Blueprint</h1>
-        <p className="subtitle">Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse</p>
-        <p className="byline">By Hazem ElBatawy</p>
+  <h1 className="glow-animated-text">Human Continuity Blueprint</h1>
+  <p className="subtitle glow-animated-text">Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse</p>
+  <p className="byline glow-animated-text">By Hazem ElBatawy</p>
       </div>
     </header>
 
-    <main className="wrap">
+  <main className="wrap">
       <article>
-        <p className="lede"> When civilization faces its greatest test, preparation becomes survival. 
-          This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small 
-          communities navigating an automated world. From immediate crisis response to long-term resilience building, 
-          discover the essential knowledge that could mean the difference between chaos and continuity</p>
+
+        <div className="intro-flex-glow">
+          <p className="intro-glow-text">
+            When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small communities navigating an automated world. From immediate crisis response to long-term resilience building, discover the essential knowledge that could mean the difference between chaos and continuity
+          </p>
+        </div>
 
         <nav className="toc">
           <strong>Contents</strong>
@@ -197,7 +198,7 @@ const HomePage = () => (
           </ol>
         </nav>
 
-        <section id="nature">
+  <section id="nature" className="lede">
           <h2>1. Understand the Nature of the "Robotic Apocalypse"</h2>
           <p>A "robotic apocalypse" can take multiple forms. Each requires a different survival mindset:</p>
           <ul>
@@ -208,7 +209,7 @@ const HomePage = () => (
           <p>Match tactics to the dominant threat model — detection and networked control vs physical force.</p>
         </section>
 
-        <section id="phase1">
+  <section id="phase1" className="lede">
           <h2>PHASE ONE — Initial Survival (First 72 Hours)</h2>
           <h3>Goal: Disappear from AI detection and stay alive</h3>
 
@@ -238,7 +239,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-        <section id="phase2">
+  <section id="phase2" className="lede">
           <h2>PHASE TWO — Short-Term Survival (Weeks 1–4)</h2>
           <h3>Goal: Build a self-sufficient, hidden micro-base</h3>
 
@@ -271,7 +272,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-        <section id="phase3">
+  <section id="phase3" className="lede">
           <h2>PHASE THREE — Long-Term Survival (Months 2–6)</h2>
           <h3>Goal: Build a sustainable human enclave</h3>
 
@@ -289,7 +290,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-        <section id="phase4">
+  <section id="phase4" className="lede">
           <h2>PHASE FOUR — Rebuilding (6+ months)</h2>
           <h3>Goal: Create a thriving micro-society</h3>
 

@@ -1,0 +1,2 @@
+check the navbar to be responsive in portraite state because i can't see it in portraite 
+i can only see it in landscape state. check the  css and app jsx page
