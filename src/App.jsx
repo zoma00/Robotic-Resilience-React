@@ -496,9 +496,8 @@ const EgyptPage = () => {
 
           <h3>Areas to Avoid</h3>
           <ul>
-            <li>Cairo metropolitan area (high surveillance, dense population)</li>
+            <li>Cairo metropolitan area (dense population)</li>
             <li>Alexandria (major port, strategic importance)</li>
-            <li>Suez Canal zone (critical infrastructure, military presence)</li>
             <li>Major highways and transportation hubs</li>
             <li>Industrial complexes and military installations</li>
             <li>Tourist areas (high monitoring, international attention)</li>
@@ -517,7 +516,6 @@ const EgyptPage = () => {
             <li>Egypt's position links Africa and Middle East</li>
             <li>Control of Suez Canal makes it high-value target</li>
             <li>Desert terrain offers concealment but harsh conditions</li>
-            <li>Ancient infrastructure may provide hidden refuge</li>
           </ul>
         </article>
       </main>
