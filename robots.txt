@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zoma00.github.io/Robotic-Resilience-React/sitemap.xml
