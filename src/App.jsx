@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { HomeHelmet, SurvivalKitHelmet, NavigationHelmet, EgyptHelmet } from './HelmetTags';
+import RankMathSeoReportWidget from './RankMathSeoReportWidget';
+import RankMathSeoWidget from './RankMathSeoWidget';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
 
@@ -158,28 +162,71 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
 // Home Page Component
 const HomePage = () => (
   <>
+    {HomeHelmet}
     <BackgroundSlideshow />
     <div className="original-site-banner">
-      <a className="banner-link banner-glow-motion" href="https://zoma00.github.io/Robotic-Resilience/" target="_blank" rel="noopener noreferrer">
-        <span role="img" aria-label="Earth" style={{marginRight: '0.3em', verticalAlign: 'middle'}}>🌍</span>
+      <a
+        className="banner-link banner-glow-motion"
+        href="https://zoma00.github.io/Robotic-Resilience/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span role="img" aria-label="Earth" style={{ marginRight: '0.3em', verticalAlign: 'middle' }}>🌍</span>
         For full experience visit the Web Version
       </a>
     </div>
+
     <header className="site-header">
       <div className="wrap">
         <Navigation />
-  <h1 className="glow-animated-text">Human Continuity Blueprint</h1>
-  <p className="subtitle glow-animated-text">Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse</p>
-  <p className="byline glow-animated-text">By Hazem ElBatawy</p>
+        <h1>Human Continuity Blueprint</h1>
+        <p className="subtitle">
+          Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse
+        </p>
+        <p className="byline">By Hazem ElBatawy</p>
       </div>
     </header>
 
-  <main className="wrap">
+    <main className="wrap">
       <article>
+        <section className="homepage-intro">
+          <h2 style={{
+            color: '#fff',
+            textShadow: '0 0 24px #fff, 0 0 48px #e0e0ff, 0 0 72px #b3b3ff',
+            fontWeight: 700
+          }}>
+            Welcome to Robotic Resilience – Survival Strategy Framework &amp; Guides
+          </h2>
+          <p>
+            <strong>Human Continuity Blueprint</strong> is your comprehensive resource for surviving and thriving
+            in a robotic apocalypse. This survival strategy framework is designed to help small human enclaves maintain
+            practical, psychological, and strategic resilience when facing advanced AI and robotic threats.
+          </p>
+          <p>
+            The <strong>Robotic Resilience</strong> approach emphasizes analog solutions, community organization,
+            and strategic planning. Learn how to secure water, food, and shelter using proven techniques. Discover how
+            to navigate without GPS, communicate securely, and build sustainable micro-societies.
+          </p>
+          <p>
+            Whether you are preparing for an AI takeover, robot rebellion, or technological collapse, our guides offer
+            practical steps for staying invisible, diversifying skills, and maintaining hope.
+          </p>
+        </section>
+
+        {/* Only show the new compact colorful Rank Math SEO widget with text inside */}
+        <RankMathSeoReportWidget />
+
+        {/* Hidden SEO info (indexable, but invisible to users) */}
+        <div className="seo-hidden-info" aria-hidden="true">
+          <h2>Practical Survival Essentials — What to Focus on First</h2>
+          <p>When time is short, prioritize three things: water, shelter, and situational awareness...</p>
+        </div>
 
         <div className="intro-flex-glow">
           <p className="intro-glow-text">
-            When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint transforms uncertainty into actionable strategy — a complete survival framework for small communities navigating an automated world. From immediate crisis response to long-term resilience building, discover the essential knowledge that could mean the difference between chaos and continuity
+            When civilization faces its greatest test, preparation becomes survival. This comprehensive blueprint
+            transforms uncertainty into actionable strategy — a complete survival framework for small communities
+            navigating an automated world.
           </p>
         </div>
 
@@ -187,18 +234,18 @@ const HomePage = () => (
           <strong>Contents</strong>
           <ol>
             <li><a href="#nature">Understand the Threat</a></li>
-            <li><a href="#phase1">Phase One — Initial Survival (72 hours)</a></li>
-            <li><a href="#phase2">Phase Two — Short-Term (Weeks 1–4)</a></li>
-            <li><a href="#phase3">Phase Three — Long-Term (Months 2–6)</a></li>
-            <li><a href="#phase4">Phase Four — Rebuilding (6+ months)</a></li>
-            <li><Link to="/navigation">Navigation Tutorial (No GPS)</Link></li>
-            <li><Link to="/egypt">Egypt Map Page</Link></li>
-            <li><Link to="/survival-kit">War Survival Kit</Link></li>
+            <li><a href="#phase1">Phase One — Initial Survival</a></li>
+            <li><a href="#phase2">Phase Two — Short-Term</a></li>
+            <li><a href="#phase3">Phase Three — Long-Term</a></li>
+            <li><a href="#phase4">Phase Four — Rebuilding</a></li>
+            <li><Link to="/navigation-tutorial">Navigation Tutorial (No GPS)</Link></li>
+            <li><Link to="/egypt-map">Egypt Map Page</Link></li>
+            <li><Link to="/war-survival-kit">War Survival Kit</Link></li>
             <li><a href="#golden">Golden Rules</a></li>
           </ol>
         </nav>
 
-  <section id="nature" className="lede">
+        <section id="nature">
           <h2>1. Understand the Nature of the "Robotic Apocalypse"</h2>
           <p>A "robotic apocalypse" can take multiple forms. Each requires a different survival mindset:</p>
           <ul>
@@ -209,7 +256,7 @@ const HomePage = () => (
           <p>Match tactics to the dominant threat model — detection and networked control vs physical force.</p>
         </section>
 
-  <section id="phase1" className="lede">
+        <section id="phase1">
           <h2>PHASE ONE — Initial Survival (First 72 Hours)</h2>
           <h3>Goal: Disappear from AI detection and stay alive</h3>
 
@@ -239,7 +286,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-  <section id="phase2" className="lede">
+        <section id="phase2">
           <h2>PHASE TWO — Short-Term Survival (Weeks 1–4)</h2>
           <h3>Goal: Build a self-sufficient, hidden micro-base</h3>
 
@@ -272,7 +319,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-  <section id="phase3" className="lede">
+        <section id="phase3">
           <h2>PHASE THREE — Long-Term Survival (Months 2–6)</h2>
           <h3>Goal: Build a sustainable human enclave</h3>
 
@@ -290,7 +337,7 @@ const HomePage = () => (
           </ul>
         </section>
 
-  <section id="phase4" className="lede">
+        <section id="phase4">
           <h2>PHASE FOUR — Rebuilding (6+ months)</h2>
           <h3>Goal: Create a thriving micro-society</h3>
 
@@ -317,10 +364,25 @@ const HomePage = () => (
             <li><strong>Stay human</strong> — Preserve culture, education, and moral values.</li>
           </ol>
         </section>
+
+        {/* Example section removed: redundant nature lede above footer */}
+
+        {/* Other sections (phase1–phase4, golden rules, etc.) */}
+
+        <footer>
+          <nav>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+              <li><Link className="footer-link" to="/war-survival-kit">War Survival Kit</Link></li>
+              <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
+              <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
+            </ul>
+          </nav>
+        </footer>
       </article>
     </main>
   </>
 );
+
 
 // Survival Kit Page Component
 const SurvivalKitPage = () => {
@@ -335,6 +397,7 @@ const SurvivalKitPage = () => {
 
   return (
     <>
+      {SurvivalKitHelmet}
       <BackgroundSlideshow images={kitImages} />
       <header className="site-header">
         <div className="wrap">
@@ -349,7 +412,6 @@ const SurvivalKitPage = () => {
         <article>
           <h2>Essential Survival Kit</h2>
           <p>A comprehensive survival kit tailored for robotic apocalypse scenarios, emphasizing analog tools and self-sufficiency.</p>
-          
           <h3>Core Equipment</h3>
           <ul>
             <li><strong>Navigation:</strong> Compass, paper maps, mechanical watch</li>
@@ -360,7 +422,6 @@ const SurvivalKitPage = () => {
             <li><strong>Medical:</strong> First aid supplies, antibiotics, pain relief</li>
             <li><strong>Communication:</strong> Analog radio, signal mirror, whistle</li>
           </ul>
-
           <h3>Electronics (Faraday Cage Storage)</h3>
           <ul>
             <li>Handheld radio transceiver</li>
@@ -368,7 +429,6 @@ const SurvivalKitPage = () => {
             <li>LED flashlights</li>
             <li>Emergency beacon (use sparingly)</li>
           </ul>
-
           <h3>Weapon & Defense</h3>
           <ul>
             <li>Multi-purpose knife or machete</li>
@@ -376,7 +436,6 @@ const SurvivalKitPage = () => {
             <li>Bear spray or pepper deterrent</li>
             <li>Camouflage materials</li>
           </ul>
-
           <h3>Long-Term Supplies</h3>
           <ul>
             <li>Seeds for food production</li>
@@ -387,6 +446,15 @@ const SurvivalKitPage = () => {
           </ul>
         </article>
       </main>
+    <footer>
+      <nav>
+        <ul style={{listStyle:'none',padding:0,margin:0,display:'inline-flex',gap:'1.5em'}}>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
+          <li><Link to="/egypt-map">Egypt Map</Link></li>
+        </ul>
+      </nav>
+    </footer>
     </>
   );
 };
@@ -401,6 +469,7 @@ const NavigationPage = () => {
 
   return (
     <>
+      {NavigationHelmet}
       <BackgroundSlideshow images={navImages} />
       <header className="site-header">
         <div className="wrap">
@@ -415,7 +484,7 @@ const NavigationPage = () => {
         <article>
           <h2>Analog Navigation Essentials</h2>
           <p>In a robotic apocalypse, GPS and digital navigation become liabilities. Master these analog techniques for reliable navigation.</p>
-          
+
           <h3>Using a Compass</h3>
           <ul>
             <li>Always calibrate away from metal objects</li>
@@ -457,34 +526,36 @@ const NavigationPage = () => {
           </ul>
         </article>
       </main>
+
+      <footer>
+        <nav>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/survival-kit">Survival-Kit</Link></li>
+            <li><Link to="/egypt-map">Egypt Map</Link></li>
+          </ul>
+        </nav>
+      </footer>
     </>
   );
 };
 
-// Egypt Map Page Component
 const EgyptPage = () => {
   const egyptImages = [
     getAssetUrl('assets/kit-photos/map/world-map-dotted.jpg'),
     getAssetUrl('assets/kit-photos/map/survival map.jpg')
   ];
-
   return (
     <>
+      {EgyptHelmet}
       <BackgroundSlideshow images={egyptImages} />
-      <header className="site-header">
-        <div className="wrap">
-          <Navigation />
-          <h1>Egypt Strategic Map</h1>
-          <p className="subtitle">Regional survival zones and strategic locations</p>
-          <p className="byline">By Hazem ElBatawy</p>
-        </div>
-      </header>
-
       <main className="wrap">
         <article>
           <h2>Egypt Survival Zones</h2>
-          <p>Strategic analysis of Egypt's geography for survival scenarios, focusing on water access, remote areas, and natural defenses.</p>
-          
+          <p>
+            Strategic analysis of Egypt's geography for survival scenarios, focusing on water access,
+            remote areas, and natural defenses.
+          </p>
           <h3>High-Value Survival Areas</h3>
           <ul>
             <li><strong>Sinai Peninsula:</strong> Mountain terrain, limited infrastructure, natural caves</li>
@@ -493,7 +564,6 @@ const EgyptPage = () => {
             <li><strong>Red Sea Coast:</strong> Fishing opportunities, escape routes by sea</li>
             <li><strong>Eastern Desert:</strong> Mountainous terrain, mining sites for resources</li>
           </ul>
-
           <h3>Areas to Avoid</h3>
           <ul>
             <li>Cairo metropolitan area (dense population)</li>
@@ -502,7 +572,6 @@ const EgyptPage = () => {
             <li>Industrial complexes and military installations</li>
             <li>Tourist areas (high monitoring, international attention)</li>
           </ul>
-
           <h3>Resource Considerations</h3>
           <ul>
             <li><strong>Water Sources:</strong> Nile River, oases, underground aquifers</li>
@@ -510,7 +579,6 @@ const EgyptPage = () => {
             <li><strong>Natural Shelter:</strong> Caves, rock formations, abandoned structures</li>
             <li><strong>Climate Challenges:</strong> Extreme heat, sandstorms, limited rainfall</li>
           </ul>
-
           <h3>Strategic Considerations</h3>
           <ul>
             <li>Egypt's position links Africa and Middle East</li>
@@ -519,6 +587,15 @@ const EgyptPage = () => {
           </ul>
         </article>
       </main>
+      <footer>
+        <nav>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
+            <li><Link to="/survival-kit">Survival-Kit</Link></li>
+          </ul>
+        </nav>
+      </footer>
     </>
   );
 };
@@ -534,6 +611,11 @@ const AppContent = () => {
         <Route path="/survival-kit" element={<SurvivalKitPage />} />
         <Route path="/navigation" element={<NavigationPage />} />
         <Route path="/egypt" element={<EgyptPage />} />
+        {/* Aliases for footer links */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/war-survival-kit" element={<SurvivalKitPage />} />
+        <Route path="/navigation-tutorial" element={<NavigationPage />} />
+        <Route path="/egypt-map" element={<EgyptPage />} />
       </Routes>
     </div>
   );
@@ -544,9 +626,11 @@ function App() {
   const basename = import.meta.env.BASE_URL;
   
   return (
-    <Router basename={basename}>
-      <AppContent />
-    </Router>
+    <HelmetProvider>
+      <Router basename={basename}>
+        <AppContent />
+      </Router>
+    </HelmetProvider>
   );
 }
 

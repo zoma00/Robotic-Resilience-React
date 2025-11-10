@@ -1,3 +1,66 @@
+/* Glassmorphism and animated shine for homepage intro */
+.homepage-intro {
+  position: relative;
+  background: rgba(255,255,255,0.18);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1.5px 8px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  padding: 2em 1.5em;
+  margin: 2em 0 2.5em 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.homepage-intro::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0.04) 100%);
+  filter: blur(8px);
+  opacity: 0.7;
+  border-radius: inherit;
+  animation: diagonal-shine-sweep 3.5s linear infinite;
+  z-index: 1;
+}
+
+@keyframes diagonal-shine-sweep {
+  0% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
+  100% { transform: translateX(30%) translateY(30%) rotate(1deg); }
+}
+/* Visually hidden SEO info section for HomePage */
+.seo-hidden-info {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Footer nav link clarity */
+.footer-link {
+  color: #f8f6f2;
+  text-shadow: none;
+  font-weight: 500;
+  background: none;
+  filter: none;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 0 24px #fff, 0 0 48px #b3e6ff, 0 0 64px #81d4fa, 0 0 80px #e1f5fe;
+  filter: brightness(1.3);
+}
 /* Remove blur and backdrop-filter for backgrounds in portrait/mobile mode */
 @media screen and (max-width: 768px), (orientation: portrait) {
   .wrap,
@@ -316,7 +379,6 @@ h1.glow-animated-text {
     top: 60%;
     left: 60%;
   }
-}
 }
 
 .intro-flex-glow::before {
@@ -1030,4 +1092,22 @@ section {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+footer {
+  z-index: 9999;
+  position: relative;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.14);
+  color: #222;
+  border-top: 1.5px solid rgba(255,255,255,0.22);
+  box-shadow: 0 -2px 16px rgba(31,38,135,0.18);
+  text-align: center;
+  margin-top: 40px;
+  padding: 16px 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 0 0 18px 18px;
 }
