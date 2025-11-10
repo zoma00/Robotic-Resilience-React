@@ -1111,3 +1111,31 @@ footer {
   -webkit-backdrop-filter: blur(12px);
   border-radius: 0 0 18px 18px;
 }
+
+/* Tweet Embed Block Styling */
+.tweet-embeds-section {
+  margin: 40px 0;
+  padding: 24px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(31,38,135,0.10);
+}
+.tweet-embed-block {
+  margin-bottom: 32px;
+  padding: 18px 12px;
+  background: rgba(255,255,255,0.13);
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(31,38,135,0.08);
+  border-left: 3px solid var(--accent, #38bdf8);
+}
+.tweet-embed-block p {
+  margin-bottom: 10px;
+  font-size: 1.08em;
+  color: #38bdf8;
+}
+.tweet-embed {
+  margin: 0 auto;
+  max-width: 480px;
+  min-height: 120px;
+  background: none;
+}

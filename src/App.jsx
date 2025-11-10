@@ -5,6 +5,8 @@ import RankMathSeoReportWidget from './RankMathSeoReportWidget';
 import RankMathSeoWidget from './RankMathSeoWidget';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
+import TweetEmbed from './components/TweetEmbed';
+import { tweetEmbeds } from './TweetEmbedsData';
 
 // Google Analytics page tracking
 const usePageTracking = () => {
@@ -158,6 +160,18 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
     </div>
   );
 };
+
+// Helper loader for TweetEmbed (fetches HTML from public/embeds)
+function TweetEmbedLoader({ htmlPath, tweetUrl }) {
+  const [html, setHtml] = React.useState('');
+  React.useEffect(() => {
+    fetch(htmlPath)
+      .then(res => res.text())
+      .then(setHtml)
+      .catch(() => setHtml(`<blockquote><a href="${tweetUrl}">View tweet</a></blockquote>`));
+  }, [htmlPath, tweetUrl]);
+  return <TweetEmbed html={html} tweetUrl={tweetUrl} />;
+}
 
 // Home Page Component
 const HomePage = () => (
@@ -363,6 +377,17 @@ const HomePage = () => (
             <li><strong>Document everything</strong> — Keep records for future generations.</li>
             <li><strong>Stay human</strong> — Preserve culture, education, and moral values.</li>
           </ol>
+        </section>
+
+        <section className="tweet-embeds-section">
+          <h2>Featured Tweets</h2>
+          {Object.entries(tweetEmbeds).map(([id, { url, htmlPath, author, summary }]) => (
+            <div key={id} className="tweet-embed-block">
+              <p><strong>{summary}</strong> <span style={{color:'#888'}}>by {author}</span></p>
+              {/* Fetch the HTML from public/embeds at runtime */}
+              <TweetEmbedLoader htmlPath={htmlPath} tweetUrl={url} />
+            </div>
+          ))}
         </section>
 
         {/* Example section removed: redundant nature lede above footer */}
