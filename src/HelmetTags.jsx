@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 // HomePage Helmet
 export const HomeHelmet = (
   <Helmet>
-    <title>Human Continuity Blueprint – Robotic Resilience</title>
+    <title>Robotic Resilience-Human Continuity Blueprint</title>
     <meta name="description" content="Robotic Resilience is a comprehensive survival strategy framework and guide for human continuity in a robotic apocalypse. Learn practical, psychological, and strategic survival for small human enclaves." />
     <link rel="canonical" href="https://zoma00.github.io/Robotic-Resilience-React/" />
   </Helmet>
