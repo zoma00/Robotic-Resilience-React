@@ -193,7 +193,7 @@ const HomePage = () => (
     <header className="site-header">
       <div className="wrap">
         <Navigation />
-        <h1>Human Continuity Blueprint</h1>
+  <h1>Human Continuity Blueprint</h1>
         <p className="subtitle">
           Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse
         </p>
@@ -576,7 +576,7 @@ const EgyptPage = () => {
       <BackgroundSlideshow images={egyptImages} />
       <main className="wrap">
         <article>
-          <h2>Egypt Survival Zones</h2>
+          <h1>Egypt Survival Zones</h1>
           <p>
             Strategic analysis of Egypt's geography for survival scenarios, focusing on water access,
             remote areas, and natural defenses.
