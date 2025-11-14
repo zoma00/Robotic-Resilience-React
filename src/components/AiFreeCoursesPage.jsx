@@ -16,10 +16,11 @@ const AiFreeCoursesPage = () => {
   }, [location]);
 
   // Slideshow image paths (public folder, use leading slash)
+  const base = process.env.NODE_ENV === 'production' ? '/Robotic-Resilience-React' : '';
   const images = [
-    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-human-brains.jpeg',
-    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-vs-humanity.jpg',
-    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-generated-girl-figure.jpg'
+    `${base}/assets/kit-photos/Ai/ai-human-brains.jpeg`,
+    `${base}/assets/kit-photos/Ai/ai-vs-humanity.jpg`,
+    `${base}/assets/kit-photos/Ai/ai-generated-girl-figure.jpg`
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
