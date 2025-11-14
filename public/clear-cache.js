@@ -5,65 +5,59 @@
  * for the Robotic Resilience website.
  */
 
-(function clearAllCaches() {
-  console.log('🔄 Starting comprehensive cache clearing...');
-  
-  // 1. Clear Service Worker caches
-  if ('serviceWorker' in navigator && 'caches' in window) {
-    caches.keys().then(function(cacheNames) {
-      console.log('📦 Found caches:', cacheNames);
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          console.log('🗑️ Deleting cache:', cacheName);
-          return caches.delete(cacheName);
-        })
-      );
-    }).then(function() {
-      console.log('✅ All service worker caches cleared');
-    });
-  }
-  
-  // 2. Unregister service worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
-      for(let registration of registrations) {
-        console.log('🔌 Unregistering service worker');
-        registration.unregister();
-      }
-    });
-  }
-  
-  // 3. Clear browser storage
-  try {
-    localStorage.clear();
-    sessionStorage.clear();
-    console.log('🧹 Local and session storage cleared');
-  } catch (e) {
-    console.log('⚠️ Could not clear storage:', e);
-  }
-  
-  // 4. Clear IndexedDB (if any)
-  if ('indexedDB' in window) {
-    try {
-      indexedDB.databases().then(databases => {
-        databases.forEach(db => {
-          console.log('🗄️ Deleting IndexedDB:', db.name);
-          indexedDB.deleteDatabase(db.name);
-        });
-      });
-    } catch (e) {
-      console.log('⚠️ Could not clear IndexedDB:', e);
-    }
-  }
-  
-  // 5. Force hard reload
-  console.log('🔄 Forcing page reload...');
-  setTimeout(() => {
-    window.location.reload(true);
-  }, 1000);
-  
-  console.log('✨ Cache clearing initiated. Page will reload in 1 second.');
-})();
+function showStatus(message, type = 'success') {
+    const status = document.getElementById('status');
+    const statusText = document.getElementById('statusText');
+    statusText.textContent = message;
+    status.className = `status ${type}`;
+    status.style.display = 'block';
+}
 
-// Bookmarklet version (copy this entire line as a bookmark URL):
-// javascript:(function(){if('serviceWorker'in navigator&&'caches'in window){caches.keys().then(function(cacheNames){return Promise.all(cacheNames.map(function(cacheName){return caches.delete(cacheName)}))}).then(function(){console.log('Caches cleared')})}if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(function(registrations){for(let registration of registrations){registration.unregister()}})}try{localStorage.clear();sessionStorage.clear()}catch(e){console.log('Storage error:',e)}setTimeout(()=>{window.location.reload(true)},500)})();
+async function clearAllCaches() {
+    showStatus('Starting cache clearing process...', 'warning');
+    try {
+        let clearedItems = [];
+        if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            if (cacheNames.length > 0) {
+                await Promise.all(cacheNames.map(name => caches.delete(name)));
+                clearedItems.push(`${cacheNames.length} service worker caches`);
+            }
+        }
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            if (registrations.length > 0) {
+                registrations.forEach(registration => registration.unregister());
+                clearedItems.push(`${registrations.length} service workers`);
+            }
+        }
+        localStorage.clear();
+        sessionStorage.clear();
+        clearedItems.push('local storage', 'session storage');
+        if ('indexedDB' in window && indexedDB.databases) {
+            const databases = await indexedDB.databases();
+            if (databases.length > 0) {
+                databases.forEach(db => indexedDB.deleteDatabase(db.name));
+                clearedItems.push(`${databases.length} IndexedDB databases`);
+            }
+        }
+        showStatus(`✅ Successfully cleared: ${clearedItems.join(', ')}. Reloading in 3 seconds...`, 'success');
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 3000);
+    } catch (error) {
+        showStatus(`❌ Error clearing caches: ${error.message}`, 'warning');
+        console.error('Cache clearing error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('clearCacheBtn').addEventListener('click', clearAllCaches);
+    document.getElementById('openMainSiteBtn').addEventListener('click', function() {
+        window.open('/', '_blank');
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auto') === 'true') {
+        setTimeout(clearAllCaches, 1000);
+    }
+});

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import './App.css';
 import TweetEmbed from './components/TweetEmbed';
 import { tweetEmbeds } from './TweetEmbedsData';
+import AiFreeCoursesPage from './components/AiFreeCoursesPage';
 
 // Google Analytics page tracking
 const usePageTracking = () => {
@@ -47,6 +48,7 @@ const Navigation = () => {
           <li><Link className="nav-link glow-animated-text" to="/survival-kit">War Survival Kit</Link></li>
           <li><Link className="nav-link glow-animated-text" to="/navigation">Navigation Tutorial</Link></li>
           <li><Link className="nav-link glow-animated-text" to="/egypt">Egypt Map</Link></li>
+          <li><Link className="nav-link glow-animated-text" to="/ai-free-courses">AI Free Courses</Link></li>
         </ul>
       </div>
     </nav>
@@ -164,12 +166,23 @@ const BackgroundSlideshow = ({ images = indexImages }) => {
 // Helper loader for TweetEmbed (fetches HTML from public/embeds)
 function TweetEmbedLoader({ htmlPath, tweetUrl }) {
   const [html, setHtml] = React.useState('');
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
+    setLoading(true);
     fetch(htmlPath)
       .then(res => res.text())
-      .then(setHtml)
-      .catch(() => setHtml(`<blockquote><a href="${tweetUrl}">View tweet</a></blockquote>`));
+      .then(data => {
+        setHtml(data || `<blockquote><a href="${tweetUrl}">View tweet</a></blockquote>`);
+        setLoading(false);
+      })
+      .catch(() => {
+        setHtml(`<blockquote><a href="${tweetUrl}">View tweet</a></blockquote>`);
+        setLoading(false);
+      });
   }, [htmlPath, tweetUrl]);
+
+  if (loading) return <div className="tweet-embed-loading">Loading tweet...</div>;
   return <TweetEmbed html={html} tweetUrl={tweetUrl} />;
 }
 
@@ -254,7 +267,7 @@ const HomePage = () => (
             <li><a href="#phase4">Phase Four — Rebuilding</a></li>
             <li><Link to="/navigation-tutorial">Navigation Tutorial (No GPS)</Link></li>
             <li><Link to="/egypt-map">Egypt Map Page</Link></li>
-            <li><Link to="/war-survival-kit">War Survival Kit</Link></li>
+            <li><Link to="/war-survival-kit">War Survival Kit</Link></li>            
             <li><a href="#golden">Golden Rules</a></li>
           </ol>
         </nav>
@@ -397,9 +410,10 @@ const HomePage = () => (
         <footer>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
-              <li><Link className="footer-link" to="/war-survival-kit">War Survival Kit</Link></li>
+              <li><Link to="/war-survival-kit" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>War Survival Kit</Link></li>
               <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
               <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
             </ul>
           </nav>
         </footer>
@@ -473,11 +487,12 @@ const SurvivalKitPage = () => {
       </main>
     <footer>
       <nav>
-        <ul style={{listStyle:'none',padding:0,margin:0,display:'inline-flex',gap:'1.5em'}}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
-          <li><Link to="/egypt-map">Egypt Map</Link></li>
-        </ul>
+         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+              <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
+              <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
+              <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+            </ul>
       </nav>
     </footer>
     </>
@@ -555,10 +570,11 @@ const NavigationPage = () => {
       <footer>
         <nav>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/survival-kit">Survival-Kit</Link></li>
-            <li><Link to="/egypt-map">Egypt Map</Link></li>
-          </ul>
+              <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
+              <li><Link className="footer-link" to="/war-survival-kit">War Survival Kit</Link></li>
+              <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+            </ul>
         </nav>
       </footer>
     </>
@@ -614,11 +630,12 @@ const EgyptPage = () => {
       </main>
       <footer>
         <nav>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
-            <li><Link to="/survival-kit">Survival-Kit</Link></li>
-          </ul>
+           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+              <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
+              <li><Link to="/survival-kit" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>War Survival Kit</Link></li>
+              <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+            </ul>
         </nav>
       </footer>
     </>
@@ -641,6 +658,7 @@ const AppContent = () => {
         <Route path="/war-survival-kit" element={<SurvivalKitPage />} />
         <Route path="/navigation-tutorial" element={<NavigationPage />} />
         <Route path="/egypt-map" element={<EgyptPage />} />
+        <Route path="/ai-free-courses" element={<AiFreeCoursesPage />} />
       </Routes>
     </div>
   );
