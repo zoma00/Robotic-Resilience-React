@@ -1,33 +1,25 @@
+
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./AiFreeCoursesPage.css";
 
+
 const AiFreeCoursesPage = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    // Inject Google Analytics gtag script if not already present
-    if (!window.gtag) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-91S8R10CS0';
-      document.head.appendChild(script);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-91S8R10CS0');
-    }
     if (window.gtag) {
       window.gtag('config', 'G-91S8R10CS0', {
-        page_path: window.location.pathname + window.location.search
+        page_path: location.pathname + location.search
       });
     }
-  }, []);
+  }, [location]);
 
   // Slideshow image paths (public folder, use leading slash)
   const images = [
-    '/assets/kit-photos/Ai/ai-human-brains.jpeg',
-    '/assets/kit-photos/Ai/ai-vs-humanity.jpg',
-    '/assets/kit-photos/Ai/ai-generated-girl-figure.jpg'
+    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-human-brains.jpeg',
+    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-vs-humanity.jpg',
+    '/Robotic-Resilience-React/assets/kit-photos/Ai/ai-generated-girl-figure.jpg'
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
