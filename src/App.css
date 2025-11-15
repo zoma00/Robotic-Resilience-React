@@ -675,9 +675,10 @@ h1.glow-animated-text {
     padding: 0.5rem 0;
   }
   
+  /* Match footer nav style for header nav-menu */
   .nav-menu.pipe-separated {
     display: inline-flex;
-    gap: 0.5rem;
+    gap: 1.5em;
     list-style: none;
     padding: 0;
     margin: 0;

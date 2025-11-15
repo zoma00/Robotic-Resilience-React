@@ -1,3 +1,34 @@
+/* Header navigation styles for AI Free Courses page */
+.ai-free-courses-header-nav {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.ai-free-courses-header-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 1.5em;
+}
+.ai-free-courses-header-nav a {
+  color: #f8f6f2;
+  text-shadow: 0 0 12px #fff, 0 0 24px #e5e7eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+/* Glowing style for main title and subtitle */
+.ai-free-courses-title,
+.ai-free-courses-subtitle {
+  text-shadow: 0 0 16px #fff, 0 0 32px #e5e7eb, 0 0 48px #f8f6f2;
+  color: #f8f6f2 !important;
+  font-weight: 700;
+  background: none;
+}
+/* Set all text color to off-white for AI Free Courses page */
+.ai-free-courses-body-frame,
+.ai-free-courses-body-frame * {
+  color: #f8f6f2 !important;
+}
 /* Show active slideshow image on desktop */
 .bg-slideshow img.active {
   opacity: 0.7 !important;
@@ -145,4 +176,20 @@
     font-size: 0.95rem;
     padding: 0.5rem 0.5rem;
   }
+}
+
+
+.ai-free-courses-header-nav {
+  position: relative;
+  z-index: 1001;
+}
+
+.ai-free-courses-header-nav a {
+  color: #f8f6f2 !important;
+  text-shadow: 0 0 12px #fff, 0 0 24px #e5e7eb !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  font-size: 1.1em !important;
+  background: none !important;
+  visibility: visible !important;
 }

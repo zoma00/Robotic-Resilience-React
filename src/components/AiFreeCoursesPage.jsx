@@ -4,6 +4,20 @@ import { Link, useLocation } from "react-router-dom";
 import "./AiFreeCoursesPage.css";
 
 
+// Simple Navigation Component (refactored for CSS-based pipe separators)
+const Navigation = () => {
+  return (
+    <nav className="ai-free-courses-header-nav">
+      <ul>
+        <li><Link to="/war-survival-kit">War Survival Kit</Link></li>
+        <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
+        <li><Link to="/egypt-map">Egypt Map</Link></li>
+        <li><Link to="/ai-free-courses">AI Hidden Synergy</Link></li>
+      </ul>
+    </nav>
+  );
+};
+
 const AiFreeCoursesPage = () => {
   const location = useLocation();
 
@@ -33,6 +47,7 @@ const AiFreeCoursesPage = () => {
 
   return (
     <>
+      <Navigation />
       <div className="bg-slideshow">
         {images.map((src, idx) => (
           <img

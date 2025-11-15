@@ -41,17 +41,14 @@ const indexImages = [
 // Simple Navigation Component (refactored for CSS-based pipe separators)
 const Navigation = () => {
   return (
-    <nav style={{ display: 'block', textAlign: 'center', marginBottom: '12px' }}>
-      <div className="nav-flex">
-        <ul className="nav-menu pipe-separated" style={{ padding: 0, margin: 0, listStyle: 'none' }}>
-          <li><Link className="nav-link glow-animated-text" to="/">Home</Link></li>
-          <li><Link className="nav-link glow-animated-text" to="/survival-kit">War Survival Kit</Link></li>
-          <li><Link className="nav-link glow-animated-text" to="/navigation">Navigation Tutorial</Link></li>
-          <li><Link className="nav-link glow-animated-text" to="/egypt">Egypt Map</Link></li>
-          <li><Link className="nav-link glow-animated-text" to="/ai-free-courses">AI Free Courses</Link></li>
-        </ul>
-      </div>
-    </nav>
+            <nav style={{ textAlign: 'center' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+                <li><Link to="/war-survival-kit" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>War Survival Kit</Link></li>
+                <li><Link to="/navigation-tutorial" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Navigation Tutorial</Link></li>
+                <li><Link to="/egypt-map" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Egypt Map</Link></li>
+                <li><Link to="/ai-free-courses" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>AI Hidden Synergy</Link></li>
+              </ul>
+            </nav>
   );
 };
 
@@ -413,7 +410,7 @@ const HomePage = () => (
               <li><Link to="/war-survival-kit" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>War Survival Kit</Link></li>
               <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
               <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
-              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Hidden Synergy </Link></li>
             </ul>
           </nav>
         </footer>
@@ -491,7 +488,7 @@ const SurvivalKitPage = () => {
               <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
               <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
               <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
-              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Hidden Synergy </Link></li>
             </ul>
       </nav>
     </footer>
@@ -573,7 +570,7 @@ const NavigationPage = () => {
               <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
               <li><Link className="footer-link" to="/war-survival-kit">War Survival Kit</Link></li>
               <li><Link className="footer-link" to="/egypt-map">Egypt Map</Link></li>
-              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Hidden Synergy </Link></li>
             </ul>
         </nav>
       </footer>
@@ -592,6 +589,15 @@ const EgyptPage = () => {
       <BackgroundSlideshow images={egyptImages} />
       <main className="wrap">
         <article>
+          {/* Egypt Map Header Navigation */}
+          <nav style={{ textAlign: 'center', marginBottom: '1.5em' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+              <li><Link to="/war-survival-kit" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>War Survival Kit</Link></li>
+              <li><Link to="/navigation-tutorial" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Navigation Tutorial</Link></li>
+              <li><Link to="/egypt-map" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Egypt Map</Link></li>
+              <li><Link to="/ai-free-courses" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>AI Hidden Synergy</Link></li>
+            </ul>
+          </nav>
           <h1>Egypt Survival Zones</h1>
           <p>
             Strategic analysis of Egypt's geography for survival scenarios, focusing on water access,
@@ -634,7 +640,7 @@ const EgyptPage = () => {
               <li><Link to="/" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>Home</Link></li>
               <li><Link to="/survival-kit" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>War Survival Kit</Link></li>
               <li><Link className="footer-link" to="/navigation-tutorial">Navigation Tutorial</Link></li>
-              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Free Courses</Link></li>
+              <li><Link to="/ai-free-courses" style={{color: '#f8f6f2', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none'}}>AI Hidden Synergy</Link></li>
             </ul>
         </nav>
       </footer>
