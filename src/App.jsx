@@ -39,18 +39,25 @@ const indexImages = [
 ];
 
 // Simple Navigation Component (refactored for CSS-based pipe separators)
-const Navigation = () => {
-  return (
-            <nav style={{ textAlign: 'center' }}>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
-                <li><Link to="/war-survival-kit" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>War Survival Kit</Link></li>
-                <li><Link to="/navigation-tutorial" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Navigation Tutorial</Link></li>
-                <li><Link to="/egypt-map" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Egypt Map</Link></li>
-                <li><Link to="/ai-free-courses" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>AI Hidden Synergy</Link></li>
-              </ul>
-            </nav>
-  );
-};
+const navLinks = [
+  { path: '/', label: 'Home' },
+  { path: '/war-survival-kit', label: 'War Survival Kit' },
+  { path: '/navigation-tutorial', label: 'Navigation Tutorial' },
+  { path: '/egypt-map', label: 'Egypt Map' },
+  { path: '/ai-free-courses', label: 'AI Hidden Synergy' }
+];
+
+const SectionHeaderNav = ({ excludePath }) => (
+  <nav style={{ textAlign: 'center', marginBottom: '1.5em' }}>
+    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
+      {navLinks.filter(link => link.path !== excludePath).map(link => (
+        <li key={link.path}>
+          <Link to={link.path} style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', fontSize: '1.1em' }}>{link.label}</Link>
+        </li>
+      ))}
+    </ul>
+  </nav>
+);
 
 // Background Slideshow Component (with configurable images)
 const BackgroundSlideshow = ({ images = indexImages }) => {
@@ -202,8 +209,9 @@ const HomePage = () => (
 
     <header className="site-header">
       <div className="wrap">
-        <Navigation />
-  <h1>Human Continuity Blueprint</h1>
+        {/* Home page: exclude Home link itself */}
+        <SectionHeaderNav excludePath="/" />
+        <h1>Human Continuity Blueprint</h1>
         <p className="subtitle">
           Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse
         </p>
@@ -437,7 +445,7 @@ const SurvivalKitPage = () => {
       <BackgroundSlideshow images={kitImages} />
       <header className="site-header">
         <div className="wrap">
-          <Navigation />
+          <SectionHeaderNav excludePath="/war-survival-kit" />
           <h1>War Survival Kit</h1>
           <p className="subtitle">Essential gear and supplies for emergency preparedness</p>
           <p className="byline">By Hazem ElBatawy</p>
@@ -510,7 +518,7 @@ const NavigationPage = () => {
       <BackgroundSlideshow images={navImages} />
       <header className="site-header">
         <div className="wrap">
-          <Navigation />
+          <SectionHeaderNav excludePath="/navigation-tutorial" />
           <h1>Navigation Tutorial</h1>
           <p className="subtitle">Survival navigation without GPS or digital devices</p>
           <p className="byline">By Hazem ElBatawy</p>
@@ -589,15 +597,7 @@ const EgyptPage = () => {
       <BackgroundSlideshow images={egyptImages} />
       <main className="wrap">
         <article>
-          {/* Egypt Map Header Navigation */}
-          <nav style={{ textAlign: 'center', marginBottom: '1.5em' }}>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'inline-flex', gap: '1.5em' }}>
-              <li><Link to="/war-survival-kit" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>War Survival Kit</Link></li>
-              <li><Link to="/navigation-tutorial" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Navigation Tutorial</Link></li>
-              <li><Link to="/egypt-map" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>Egypt Map</Link></li>
-              <li><Link to="/ai-free-courses" style={{ color: 'rgb(248, 246, 242)', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 600, textDecoration: 'none' }}>AI Hidden Synergy</Link></li>
-            </ul>
-          </nav>
+          <SectionHeaderNav excludePath="/egypt-map" />
           <h1>Egypt Survival Zones</h1>
           <p>
             Strategic analysis of Egypt's geography for survival scenarios, focusing on water access,

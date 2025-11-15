@@ -9,10 +9,11 @@ const Navigation = () => {
   return (
     <nav className="ai-free-courses-header-nav">
       <ul>
+        <li><Link to="/">Home</Link></li>
+
         <li><Link to="/war-survival-kit">War Survival Kit</Link></li>
         <li><Link to="/navigation-tutorial">Navigation Tutorial</Link></li>
         <li><Link to="/egypt-map">Egypt Map</Link></li>
-        <li><Link to="/ai-free-courses">AI Hidden Synergy</Link></li>
       </ul>
     </nav>
   );
