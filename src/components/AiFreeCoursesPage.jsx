@@ -60,6 +60,19 @@ const AiFreeCoursesPage = () => {
           />
         ))}
       </div>
+      {/* Header Section with GitHub Link */}
+      <div style={{textAlign:'center', marginTop:'0'}}>
+        <h1 className="ai-free-courses-title">AI Free Learning Goals</h1>
+        <h2 style={{fontWeight:700, fontSize:'1.3rem', marginBottom:'1rem'}}>🚀 The Hidden Synergy: How Free AI Education Fuels Smarter Machines</h2>
+        <p>Understand why free AI learning is a game-changer for machines.</p>
+        <p className="byline">By Hazem ElBatawy
+          <span style={{ display: 'block', marginTop: '0.5em' }}>
+            <a href="https://github.com/zoma00/" target="_blank" rel="noopener noreferrer" style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', borderRadius: '6px', padding: '0.2em 0.7em', fontSize: '1em', display: 'inline-block' }}>
+              Visit my GitHub
+            </a>
+          </span>
+        </p>
+      </div>
       <div className="ai-free-courses-body-frame" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%'}}>
         {/* Intro & Main Title */}
         <div className="ai-free-courses-container" style={{maxWidth: '700px', width: '100%', marginBottom: '2rem'}}>

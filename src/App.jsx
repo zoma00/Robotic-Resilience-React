@@ -216,6 +216,11 @@ const HomePage = () => (
           Practical, psychological, and strategic survival for a small human enclave in a robotic apocalypse
         </p>
         <p className="byline">By Hazem ElBatawy</p>
+        <p style={{ marginTop: '0.5em' }}>
+          <a href="https://github.com/zoma00/" target="_blank" rel="noopener noreferrer" style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', borderRadius: '6px', padding: '0.2em 0.7em', fontSize: '1em', display: 'inline-block' }}>
+            Visit my GitHub
+          </a>
+        </p>
       </div>
     </header>
 
@@ -449,6 +454,11 @@ const SurvivalKitPage = () => {
           <h1>War Survival Kit</h1>
           <p className="subtitle">Essential gear and supplies for emergency preparedness</p>
           <p className="byline">By Hazem ElBatawy</p>
+          <p style={{ marginTop: '0.5em' }}>
+            <a href="https://github.com/zoma00/" target="_blank" rel="noopener noreferrer" style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', borderRadius: '6px', padding: '0.2em 0.7em', fontSize: '1em', display: 'inline-block' }}>
+              Visit my GitHub
+            </a>
+          </p>
         </div>
       </header>
 
@@ -522,6 +532,11 @@ const NavigationPage = () => {
           <h1>Navigation Tutorial</h1>
           <p className="subtitle">Survival navigation without GPS or digital devices</p>
           <p className="byline">By Hazem ElBatawy</p>
+          <p style={{ marginTop: '0.5em' }}>
+            <a href="https://github.com/zoma00/" target="_blank" rel="noopener noreferrer" style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', borderRadius: '6px', padding: '0.2em 0.7em', fontSize: '1em', display: 'inline-block' }}>
+              Visit my GitHub
+            </a>
+          </p>
         </div>
       </header>
 
@@ -602,6 +617,13 @@ const EgyptPage = () => {
           <p>
             Strategic analysis of Egypt's geography for survival scenarios, focusing on water access,
             remote areas, and natural defenses.
+          </p>
+          <p className="byline">By Hazem ElBatawy
+            <span style={{ display: 'block', marginTop: '0.5em' }}>
+              <a href="https://github.com/zoma00/" target="_blank" rel="noopener noreferrer" style={{ color: '#f8f6f2', background: '#222', textShadow: '0 0 12px #fff, 0 0 24px #e5e7eb', fontWeight: 700, textDecoration: 'none', borderRadius: '6px', padding: '0.2em 0.7em', fontSize: '1em', display: 'inline-block' }}>
+                Visit my GitHub
+              </a>
+            </span>
           </p>
           <h3>High-Value Survival Areas</h3>
           <ul>
